@@ -41,11 +41,6 @@ const server= express();
 
 const {conn}=require("./DB_connection")
 const PORT=3001
-conn.sync({force:false}).then( ()=>{
-   server.listen(PORT,"0.0.0.0", ()=>{
-       console.log('Server raised in port: ' + PORT);
-   }) }) 
-   .catch(err=>console.log(err))
 
 
 server.use((req, res, next) => {
@@ -79,3 +74,9 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
    console.error(err);
    res.status(status).send(message);
  });
+
+ conn.sync({force:false}).then( ()=>{
+   server.listen(PORT,"0.0.0.0", ()=>{
+       console.log('Server raised in port: ' + PORT);
+   }) }) 
+   .catch(err=>console.log(err))
